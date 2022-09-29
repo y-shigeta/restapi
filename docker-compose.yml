@@ -1,0 +1,28 @@
+version: '3'
+
+#networks:
+#  internal
+
+services:
+
+  nginx:
+    build: ./nginx
+    image: nginx-web
+    container_name: web
+    #restart: always
+    ports:
+      - 80:80
+    environment:
+      WORDPRESS_DB_PASSWORD: my-secret-pw
+#    volumes:
+#      - confd:/etc/nginx/conf.d
+#volumes:
+#  confd:
+
+  restapi:
+    build: ./restapi
+    image: restapi-app
+    container_name: app
+    #restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
