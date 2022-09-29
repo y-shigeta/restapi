@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-backend
+  labels:
+    app: example
+    tier: backend
+  namespace: example
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: example
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: example
+        tier: backend
+    spec:
+      containers:
+        - name: app
+          image: us-central1-docker.pkg.dev/white-artwork-286219/restapi/restapi:1.0
+#          resources:
+#            requests:
+#              cpu: 200m
+#              memory: 300Mi
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+          - name: env
+            value: dev

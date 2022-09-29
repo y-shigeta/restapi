@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-frontend
+  labels:
+    app: example
+    tier: frontend
+  namespace: example
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: example
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: example
+        tier: frontend
+    spec:
+      containers:
+        - name: nginx
+          image: us-central1-docker.pkg.dev/white-artwork-286219/restapi/nginx-web:1.0
+#          resources:
+#            requests:
+#              cpu: 200m
+#              memory: 300Mi
+          ports:
+            - name: http
+              containerPort: 80
+          env:
+            - name: env
+              value: dev
